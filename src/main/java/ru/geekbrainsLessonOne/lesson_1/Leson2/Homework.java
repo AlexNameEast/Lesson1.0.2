@@ -1,4 +1,4 @@
-package Leson2;
+package ru.geekbrainsLessonOne.lesson_1.Leson2;
 
 import java.util.Arrays;
 
@@ -13,35 +13,60 @@ public class Homework {
         task3();
 //        Создать квадратный двумерный целочисленный массив (количество строк и столбцов одинаковое), и с помощью
 //        цикла(-ов) заполнить его диагональные элементы единицами;
-        task4(5);
+        task4(15);
 //** Задать одномерный массив и найти в нем минимальный и максимальный элементы (без помощи интернета);
+
 
 
 //** Написать метод, в который передается не пустой одномерный целочисленный массив, метод должен вернуть true, если
 // в массиве есть место, в котором сумма левой и правой части массива равны. Примеры: checkBalance([2, 2, 2, 1, 2, 2, || 10, 1]) → true,
 // checkBalance([1, 1, 1, || 2, 1]) → true, граница показана символами ||, эти символы в массив не входят.
+        int[] arr1= {2,2,2,2,8,16};
+        System.out.println("\nTask 5:\n" + task5(arr1));
 
 
 //**** Написать метод, которому на вход подается одномерный массив и число n (может быть положительным, или отрицательным),
 // при этом метод должен сместить все элементы массива на n позиций. Элементы смещаются циклично. Для усложнения задачи
 // нельзя пользоваться вспомогательными массивами. Примеры: [ 1, 2, 3 ] при n = 1 (на один вправо) -> [ 3, 1, 2 ]; [ 3, 5, 6, 1]
 // при n = -2 (на два влево) -> [ 6, 1, 3, 5 ]. При каком n в какую сторону сдвиг можете выбирать сами.
+        int[] arr= {2,3,4,5,8,16};
+        int n = 2, tmp;
+        for(int i=0; i<arr.length; i++){
+            tmp = arr[i];
+            arr[i] = tmp;
+
+        }
+    }
+    private static boolean task5(int[] arr) {
+        float summa = 0;
+        for (int i = 0; i < arr.length; i++){
+            summa += arr[i];
+        }
+        float temp = 0;
+        summa = summa / 2;
+        for(int i = 0; i < arr.length-1; i++){
+            temp += arr[i];
+            if (temp == summa) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private static void task4(int size) {
-        int[][] arr4 = new int[size][size];
-        for (int i = 0; i < arr4.length; i++) {
-            for (int j = 0; j<arr4.length; j++){
-                if( i == j) arr4[i][j] = 1;
-                if ( i + j == arr4.length -1) arr4[i][j] = 1;
+        int[][] arr = new int[size][size];
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j<arr.length; j++){
+                if( i == j) arr[i][j] = 1;
+                if ( i + j == arr.length -1) arr[i][j] = 1;
             }
         }
         System.out.println("\nTask 4:");
 
-        for (int i = 0; i < arr4.length; i++) {
+        for (int i = 0; i < arr.length; i++) {
             System.out.println("\n");
-            for (int j = 0; j<arr4.length; j++){
-                System.out.print(arr4[i][j] + "  ");
+            for (int j = 0; j<arr.length; j++){
+                System.out.print(arr[i][j] + "  ");
             }
         }
        // System.out.println("\nTask 4:\n" + Arrays.deepToString(arr4));
