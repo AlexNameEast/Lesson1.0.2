@@ -20,6 +20,7 @@ public class Homework {
                 switch (menu) {
                     case 0:
                         System.out.println("Программа завершена!");
+                        scanner.close();
                         return;
                     case 1:
                         task1();
