@@ -101,6 +101,7 @@ public class Homework {
                 "pepper", "pineapple", "pumpkin", "potato"};
         Random random = new Random();
         int hiddeWord = random.nextInt(words.length);
+        //
 
 
 
