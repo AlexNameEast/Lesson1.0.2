@@ -10,7 +10,6 @@ public class Homework {
     public static void main(String[] args) {
         for (; ; ) {
             System.out.println("Выберите игру:");
-
             System.out.print("1 - Угадай число");
             System.out.println("\t2 - Угадай слово");
             System.out.print("Введите номер задачи (0 - выход из программы): ");
