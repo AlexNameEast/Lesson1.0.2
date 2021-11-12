@@ -9,8 +9,9 @@ public class Homework {
 
     public static void main(String[] args) {
         for (; ; ) {
-            System.out.print("1 - Task1");
-            System.out.println("\t2 - Task2");
+            System.out.println("Выберите игру:");
+            System.out.print("1 - Угадай число");
+            System.out.println("\t2 - Угадай слово");
             System.out.print("Введите номер задачи (0 - выход из программы): ");
 
             if (scanner.hasNextInt()) {
@@ -29,6 +30,9 @@ public class Homework {
                     default:
                         System.out.println("\nНеверный вариант, повторите попытку!\n");
                 }
+            } else {
+                scanner.nextLine();
+                System.out.println("\nЭто не число, повторите попытку!\n");
             }
         }
     }
@@ -47,7 +51,6 @@ public class Homework {
                 System.out.println("Попробуй угадать число! ( 0 - 9 ): ");
                 if (scanner.hasNextInt()) {
                     int number = scanner.nextInt();
-                    System.out.println(hiddenNumber);
                     if (hiddenNumber == number) {
                         System.out.println("Поздравляю!!! Вы выиграли!!!");
                         i = 3;
@@ -59,6 +62,9 @@ public class Homework {
                         System.out.println("Загаданное число меньше");
                     }
 
+                }else{
+                    scanner.nextLine();
+                    System.out.println("Это не число!");
                 }
 
             }
@@ -74,6 +80,9 @@ public class Homework {
                     }
                 }
 
+            }else{
+                scanner.nextLine();
+                System.out.println("Это не число! Попробуйте еще раз (1 – да / 0 – нет)");
             }
             //endregion
         }
@@ -101,9 +110,27 @@ public class Homework {
                 "pepper", "pineapple", "pumpkin", "potato"};
         Random random = new Random();
         int hiddeWord = random.nextInt(words.length);
-        //
-
-
-
+        String answer;
+        do {
+            System.out.println("\n\nОтгадайте одно из этих слов:\n" +
+                    "\"apple\", \"orange\", \"lemon\", \"banana\", \"apricot\", \"avocado\", \"broccoli\", \"carrot\", \"cherry\",\n" +
+                    "\"garlic\", \"grape\", \"melon\", \"leak\", \"kiwi\", \"mango\", \"mushroom\", \"nut\", \"olive\", \"pea\", \"peanut\", \"pear\",\n" +
+                    "\"pepper\", \"pineapple\", \"pumpkin\", \"potato\"");
+            answer = scanner.nextLine();
+            for (int i = 0; i < 15; i++) {
+                if (i < answer.length() && i < words[hiddeWord].length()) {
+                    if (answer.charAt(i) == words[hiddeWord].charAt(i)) {
+                        if (answer.equals(words[hiddeWord])) break;
+                        System.out.print(answer.charAt(i));
+                    } else {
+                        System.out.print("#");
+                    }
+                } else {
+                    System.out.print("#");
+                }
+            }
+        }
+        while (!answer.equals(words[hiddeWord]));
+        System.out.println("\nПоздравляю с победой!!!!!!!");
     }
 }
