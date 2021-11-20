@@ -228,6 +228,9 @@ public class H_w {
             System.out.print("Введите размерность поля Х, Y: ");
             fieldSizeX = scanner.nextInt();
             fieldSizeY = scanner.nextInt();
+
+
+
             initialize(fieldSizeX, fieldSizeY);
             if (fieldSizeX > 3 || fieldSizeY > 3) winKol = 4;
             else winKol = 3;
@@ -251,4 +254,3 @@ public class H_w {
 
     }
 }
-
