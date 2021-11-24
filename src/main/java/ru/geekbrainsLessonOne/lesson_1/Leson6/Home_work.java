@@ -10,13 +10,11 @@ package ru.geekbrainsLessonOne.lesson_1.Leson6;
 public class Home_work {
     public static void main(String[] args) {
 
-        //тут не совсем понимаю какого типа нужно создавать переменную, вы на уроке делали
-        //Runable / Animals / Cats ... если несложно оставьте комментарий. спасибо.
         Cats cat1 = new Cats("Мурзик1");
         Cats cat2 = new Cats("Мурзик2");
         Cats cat3 = new Cats("Мурзик3");
         Cats cat4 = new Cats("Мурзик4");
-        Dogs dog1 = new Dogs("Барсик1");
+        Dogs dog1 = new Dogs("Барсик1", 100, 20);
         cat1.run(50);
         cat1.swim(20);
         dog1.run(520);
@@ -24,28 +22,42 @@ public class Home_work {
 
         dog1.run(200);
         dog1.swim(15);
-        cat1.info();
+
+        System.out.println();
+        System.out.println("Было создано " + Cats.counter + " котов");
+        System.out.println("Было создано " + Dogs.counter + " собак");
+        System.out.println("Было создано " + Animals.counter + " животных");
+
 
     }
 }
 
 
-abstract class Animals {
+abstract class Animals implements Runnable {
+    static int counter;
     protected String name;
-    protected static int counter = 0;
-    protected static int counterCats = 0;
-    protected static int counterDogs = 0;
+    private int maxRun;
+    private int maxSwim;
 
-
-    public Animals(String name) {
+    public Animals(String name, int maxRun, int maxSwim) {
         this.name = name;
+        this.maxRun = maxRun;
+        this.maxSwim = maxSwim;
         counter++;
     }
-    void info() {
-        System.out.printf("\nВсего животных:%d  Котов:%d  Собак:%d", counter, counterCats, counterDogs);
+
+    public void run(int distance) {
+        if (distance <= maxRun) {
+            System.out.printf("%s пробежал %d метров\n", name, distance);
+        } else System.out.printf("%s не смог пробежать %d метров\n", name, distance);
+    }
+
+    public void swim(int distance) {
+        if (distance <= maxSwim) {
+            System.out.printf("%s проплыл %d метров\n", name, distance);
+        } else System.out.printf("%s не смог проплыть %d метров\n", name, distance);
     }
 }
-
 
 interface Runnable {
     void run(int dist);
@@ -55,47 +67,26 @@ interface Runnable {
 
 }
 
-class Dogs extends Animals implements Runnable {
+class Dogs extends Animals {
 
-    public Dogs(String name) {
-        super(name);
-        counterDogs++;
-    }
-
-    private int maxDistRun = 500;
-    private int maxDistSwim = 10;
-
-    @Override
-    public void run(int dist) {
-        if (dist < maxDistRun) System.out.printf("%s пробежал %d м.\n", name, dist);
-        else System.out.println("Слишком большое расстояние!");
-    }
-
-    @Override
-    public void swim(int dist) {
-        if (dist < maxDistSwim) System.out.printf("%s проплыл %d м.\n", name, dist);
-        else System.out.println("Слишком большое расстояние!");
+    static int counter;
+    Dogs(String name, int maxRun, int maxSwim) {
+        super(name, maxRun, maxSwim);
+        counter++;
     }
 }
 
-class Cats extends Animals implements Runnable {
+class Cats extends Animals {
 
+    static int counter;
 
-    public Cats(String name) {
-        super(name);
-        counterCats++;
-    }
-
-    private int maxDistRun = 200;
-
-    @Override
-    public void run(int dist) {
-        if (dist < maxDistRun) System.out.printf("%s пробежал %d м.\n", name, dist);
-        else System.out.println("Слишком большое расстояние!");
+    Cats(String name) {
+        super(name, 200, 0);
+        counter++;
     }
 
     @Override
-    public void swim(int d) {
-        System.out.printf("%s плавать не умеет!\n", name);
+    public void swim(int distance) {
+        System.out.println(name + " не умеет плавать!");
     }
 }
