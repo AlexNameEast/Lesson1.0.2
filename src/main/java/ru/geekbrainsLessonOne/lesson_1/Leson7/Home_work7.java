@@ -3,25 +3,61 @@ package ru.geekbrainsLessonOne.lesson_1.Leson7;
 public class Home_work7 {
     public static void main(String[] args) {
 
-        Cats cat1 = new Cats("Мурзик1");
-        Cats cat2 = new Cats("Мурзик2");
-        Cats cat3 = new Cats("Мурзик3");
-        Cats cat4 = new Cats("Мурзик4");
-        Dogs dog1 = new Dogs("Барсик1", 100, 20);
-        cat1.run(50);
-        cat1.swim(20);
-        dog1.run(520);
-        dog1.swim(5);
-
-        dog1.run(200);
-        dog1.swim(15);
-
-        System.out.println();
-        System.out.println("Было создано " + Cats.counter + " котов");
-        System.out.println("Было создано " + Dogs.counter + " собак");
-        System.out.println("Было создано " + Animals.counter + " животных");
+        Plate plate = new Plate(100);
+        Cats cats[] = {
+                new Cats("Мурзик1", 20),
+                new Cats("Мурзик2", 25),
+                new Cats("Мурзик3", 30),
+                new Cats("Мурзик4", 50)
+        };
 
 
+//        Dogs dog1 = new Dogs("Барсик1", 100, 20);
+//        cats[0].run(50);
+//        cats[1].swim(20);
+//        dog1.run(520);
+//        dog1.swim(5);
+//
+//        dog1.run(200);
+//        dog1.swim(15);
+//
+//        System.out.println();
+//        System.out.println("Было создано " + Cats.counter + " котов");
+//        System.out.println("Было создано " + Dogs.counter + " собак");
+//        System.out.println("Было создано " + Animals.counter + " животных");
+
+        for (Cats c : cats) {
+            c.eat(plate);
+        }
+        plate.info();
+        for (Cats c : cats) {
+            System.out.println(c.name + " сытость - " + c.isSatiety());
+        }
+
+
+    }
+}
+
+class Plate {
+    private int food;
+
+    public Plate(int food) {
+        this.food = food;
+    }
+
+    public void info() {
+        System.out.println("\nЕды в тарелке: " + food + " грамм");
+    }
+
+    public boolean decreaseFood(int n) {
+        if (food > n) {
+            food -= n;
+            return true;
+        } else return false;
+    }
+
+    public void addFood(int f) {
+        if (f > 0) food += f;
     }
 }
 
@@ -63,6 +99,7 @@ interface Runnable {
 class Dogs extends Animals {
 
     static int counter;
+
     Dogs(String name, int maxRun, int maxSwim) {
         super(name, maxRun, maxSwim);
         counter++;
@@ -72,9 +109,17 @@ class Dogs extends Animals {
 class Cats extends Animals {
 
     static int counter;
+    private int appetite;
+    private boolean satiety;
 
-    Cats(String name) {
+    public boolean isSatiety() {
+        return satiety;
+    }
+
+    Cats(String name, int appetite) {
         super(name, 200, 0);
+        this.appetite = appetite;
+        satiety = false;
         counter++;
     }
 
@@ -82,4 +127,12 @@ class Cats extends Animals {
     public void swim(int distance) {
         System.out.println(name + " не умеет плавать!");
     }
+
+    public void eat(Plate p) {
+        if (p.decreaseFood(appetite)) {
+            satiety = true;
+            System.out.println(name + " покушал)");
+        } else System.out.println(name + " не покушал, потому что не хватило еды(");
+    }
+
 }
