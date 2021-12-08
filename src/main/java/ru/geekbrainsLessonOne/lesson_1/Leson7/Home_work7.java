@@ -12,27 +12,31 @@ public class Home_work7 {
         };
 
 
-//        Dogs dog1 = new Dogs("Барсик1", 100, 20);
-//        cats[0].run(50);
-//        cats[1].swim(20);
-//        dog1.run(520);
-//        dog1.swim(5);
-//
-//        dog1.run(200);
-//        dog1.swim(15);
-//
-//        System.out.println();
-//        System.out.println("Было создано " + Cats.counter + " котов");
-//        System.out.println("Было создано " + Dogs.counter + " собак");
-//        System.out.println("Было создано " + Animals.counter + " животных");
+        boolean f = true;
+        while (f){
+            f = false;
+            for (Cats cat: cats) {
+                if (!cat.isSatiety()){
+                    cat.eat(plate);
+                    System.out.println(cat.name + (cat.isSatiety() ? " сыт" : " голоден"));
+                    if (!cat.isSatiety()){
+                        plate.addFood(10);
+                        plate.info();
+                        f = true;
+                        break;
+                    }
+                }
+            }
+        }
 
+        /*
         for (Cats c : cats) {
             c.eat(plate);
         }
         plate.info();
         for (Cats c : cats) {
             System.out.println(c.name + " сытость - " + c.isSatiety());
-        }
+        }*/
 
 
     }
