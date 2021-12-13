@@ -20,13 +20,18 @@ public class Sample01 {
 
         Orange orange = new Orange();
         Apple apple = new Apple();
-        Box box = new Box(orange);
+        Box<Orange> box = new Box(orange);
         System.out.println(orange.getWeight());
         box.add(new Orange());
         box.add(new Orange());
         box.add(new Orange());
-        box.add(new Apple());
+        Box<Orange> box01 = new Box(orange);
+
+        Box<Apple> box02 = new Box(apple);
         System.out.println(box.kolFruit.size() + 1);
+        box.toBox(box01);
+        box01.add(new Orange());
+        System.out.println(box.kolFruit.size() + " " + (box01.kolFruit.size() + 1));
 
 
     }
@@ -71,18 +76,27 @@ public class Sample01 {
     }
 
     public static class Box<T extends Fruit> {
-        private ArrayList<T[]> kolFruit;
+        private ArrayList<T> kolFruit;
 
-        public Box(T... obj) {
-            kolFruit = new ArrayList<T[]>();
+        public Box(T obj) {
+            kolFruit = new ArrayList<T>();
         }
 
-        public void getWeight(Fruit f) {
-            //this.weight += f.weight ;
+        float getWeight() {
+            return kolFruit.size() * kolFruit.get(0).getWeight();
         }
 
-        public void add(T... obj) {
+        public void add(T obj) {
             kolFruit.add(obj);
+        }
+
+        boolean compare(T obj) {
+            return this.getWeight() == obj.getWeight();
+        }
+
+        void toBox(Box<T> obj) {
+            obj.kolFruit.addAll(this.kolFruit);
+            this.kolFruit.removeAll(kolFruit);
         }
     }
 }
